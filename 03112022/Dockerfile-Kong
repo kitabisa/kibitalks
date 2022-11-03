@@ -1,0 +1,9 @@
+FROM kong:2.6.0-alpine
+LABEL description="Alpine Kong 2.6.0 kong-oidc plugin"
+USER root
+RUN apk update && apk add luarocks
+RUN luarocks install lua-resty-openidc
+
+COPY kong/plugins/oidc /usr/local/share/lua/5.1/kong/plugins/oidc
+
+USER kong
