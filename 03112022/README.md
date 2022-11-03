@@ -1,4 +1,4 @@
-# Keycloak
+# Keycloak, Identity and Access Management
 
 ## How to use
 - Build kong container image by run `make kong` first
@@ -7,3 +7,8 @@
 - Add new database `kong` and `konga`
 - Run remaining container with `docker-compose up -d`
 
+## Keycloak configuration
+TBA
+
+## Kong configuration
+TBA
