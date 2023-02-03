@@ -45,7 +45,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
-          folder: 07022023/web-project/reporter
+          folder: 07022023/web-project/reporter/web
           clean: false
           single-commit: true
 

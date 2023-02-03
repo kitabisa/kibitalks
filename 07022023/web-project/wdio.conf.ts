@@ -1,4 +1,4 @@
-const { TimelineService } = require('wdio-timeline-reporter/timeline-service');
+const { TimelineService, ScreenshotService } = require('wdio-timeline-reporter/timeline-service');
 
 export const config: WebdriverIO.Config = {
   // Runner Configuration
@@ -34,11 +34,11 @@ export const config: WebdriverIO.Config = {
   waitforTimeout: 30000,
   connectionRetryTimeout: 40000,
   connectionRetryCount: 2,
-  services: [[TimelineService], 'chromedriver'],
+  services: [[TimelineService, ScreenshotService], 'chromedriver'],
   framework: 'mocha',
   reporters: [ "spec", ['timeline', 
   { 
-    outputDir: './reporter',
+    outputDir: './reporter/web',
     embedImages: true,
     images: {
       quality: 80,

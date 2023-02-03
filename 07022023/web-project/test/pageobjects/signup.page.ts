@@ -25,7 +25,6 @@ class SignupPage extends Page {
 
   async chooseDob(value: string) {
     const selector = $("//option[text()='"+value+"']");
-    await action.scrollInto(selector);
     await action.expectToExist(selector);
     await action.clickOn(selector);
   };
