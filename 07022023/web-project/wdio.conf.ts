@@ -5,9 +5,9 @@ export const config: WebdriverIO.Config = {
   runner: 'local',
 
   autoCompileOpts: {
-    tsNodeOpts: {
-      project: './tsconfig.json'
-    }
+  tsNodeOpts: {
+    project: './tsconfig.json'
+  }
   },
   
   specs: ['./test/specs/*.ts'],
@@ -16,15 +16,15 @@ export const config: WebdriverIO.Config = {
   // Capabilities
   maxInstances: 10,
   capabilities: [{
-    maxInstances: 1,
-    browserName: 'chrome',
-    acceptInsecureCerts: true,
-    "goog:chromeOptions": {
-      args: [
-        "--headless",
-        "--incognito",
-      ]
-      }
+  maxInstances: 1,
+  browserName: 'chrome',
+  acceptInsecureCerts: true,
+  "goog:chromeOptions": {
+    args: [
+    "--headless",
+    "--incognito",
+    ]
+    }
   }],
 
   // Test Configurations
@@ -38,19 +38,19 @@ export const config: WebdriverIO.Config = {
   framework: 'mocha',
   reporters: [ "spec", ['timeline', 
   { 
-    outputDir: './reporter/web',
-    embedImages: true,
-    images: {
-      quality: 80,
-      resize: false,
-      reductionRatio: 1
-    },
-    screenshotStrategy: 'on:error'
+  outputDir: './reporter/web',
+  embedImages: true,
+  images: {
+    quality: 80,
+    resize: false,
+    reductionRatio: 1
+  },
+  screenshotStrategy: 'on:error'
   }] 
 ],
   
   mochaOpts: {
-    ui: 'bdd',
-    timeout: 40000
+  ui: 'bdd',
+  timeout: 40000
   },
 }
