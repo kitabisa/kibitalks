@@ -1,4 +1,4 @@
-name: manual-trigger
+name: manual-trigger-web
 
 on: workflow_dispatch
 
