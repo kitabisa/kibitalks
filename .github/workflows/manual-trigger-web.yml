@@ -1,0 +1,51 @@
+name: manual-trigger-web
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: 07022023/web-project
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Update chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+
+      - name: Run automation test
+        if: always()
+        run: pnpm run test
+
+      - name: Deploy reports to github pages
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages
+          folder: 07022023/web-project/reporter/web
+          clean: false
+          single-commit: true
+
