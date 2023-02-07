@@ -1,0 +1,90 @@
+{
+  "start": "2023-02-07T13:13:15.174Z",
+  "end": "2023-02-07T13:13:19.838Z",
+  "capabilities": {
+    "acceptInsecureCerts": true,
+    "browserName": "chrome",
+    "browserVersion": "109.0.5414.119",
+    "chrome": {
+      "chromedriverVersion": "109.0.5414.74 (e7c5703604daa9cc128ccf5a5d3e993513758913-refs/branch-heads/5414@{#1172})",
+      "userDataDir": "/tmp/.com.google.Chrome.Mr9Lge"
+    },
+    "goog:chromeOptions": {
+      "debuggerAddress": "localhost:41953"
+    },
+    "networkConnectionEnabled": false,
+    "pageLoadStrategy": "normal",
+    "platformName": "linux",
+    "proxy": {},
+    "setWindowRect": true,
+    "strictFileInteractability": false,
+    "timeouts": {
+      "implicit": 0,
+      "pageLoad": 300000,
+      "script": 30000
+    },
+    "unhandledPromptBehavior": "dismiss and notify",
+    "webauthn:extension:credBlob": true,
+    "webauthn:extension:largeBlob": true,
+    "webauthn:virtualAuthenticators": true,
+    "sessionId": "091c514213cf72cd0c9f80aa30582e86"
+  },
+  "host": "localhost",
+  "port": 9515,
+  "baseUrl": "https://www.facebook.com/signup",
+  "framework": "mocha",
+  "duration": 4664,
+  "suites": [
+    {
+      "title": "Register Facebook",
+      "duration": 4550,
+      "start": "2023-02-07T13:13:15.178Z",
+      "end": "2023-02-07T13:13:19.728Z",
+      "tests": [
+        {
+          "title": "NEGATIVE - empty all field",
+          "start": "2023-02-07T13:13:15.178Z",
+          "end": "2023-02-07T13:13:17.104Z",
+          "duration": 1926,
+          "state": "passed",
+          "screenshots": []
+        },
+        {
+          "title": "POSITIVE - successfully registered with email",
+          "start": "2023-02-07T13:13:17.105Z",
+          "end": "2023-02-07T13:13:19.726Z",
+          "duration": 2621,
+          "state": "passed",
+          "screenshots": [
+            "/home/runner/work/kibitalks/kibitalks/07022023/web-project/reporter/web/file-1675775597158.jpeg",
+            "/home/runner/work/kibitalks/kibitalks/07022023/web-project/reporter/web/file-1675775599796.jpeg"
+          ]
+        }
+      ],
+      "hooks": [
+        {
+          "start": "2023-02-07T13:13:15.178Z",
+          "end": "2023-02-07T13:13:16.337Z",
+          "duration": 1159,
+          "title": "\"before each\" hook for Register Facebook",
+          "associatedSuite": "Register Facebook"
+        },
+        {
+          "start": "2023-02-07T13:13:17.105Z",
+          "end": "2023-02-07T13:13:17.813Z",
+          "duration": 708,
+          "title": "\"before each\" hook for Register Facebook",
+          "associatedSuite": "Register Facebook"
+        }
+      ]
+    }
+  ],
+  "specs": [
+    "file:///home/runner/work/kibitalks/kibitalks/07022023/web-project/test/specs/register.ts"
+  ],
+  "state": {
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  }
+}
