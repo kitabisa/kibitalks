@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_PASSWORD: pass
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: kibitalk
+      TZ: "Asia/Jakarta"
+    ports:
+      - 3306:3306
+    restart: always
+    networks:
+      - kb-backend-test
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    platform: linux/amd64
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    container_name: rabbit
+    image: heidiks/rabbitmq-delayed-message-exchange:latest
+    ports:
+      - "5672:5672"
+    networks:
+      - kb-backend-test
+    restart: always
+
+networks:
+  kb-backend-test:
+    driver: bridge
+    external: false
+    name: kb-backend-test
+
