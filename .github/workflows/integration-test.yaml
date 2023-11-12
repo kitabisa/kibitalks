@@ -17,15 +17,6 @@ jobs:
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
-
-      - name: Configure Git for private modules
-        env:
-          USER: ${{ secrets.GH_USER }}
-          TOKEN: ${{ secrets.GH_TOKEN }}
-        run: git config --global url."https://${USER}:${TOKEN}@github.com".insteadOf "https://github.com"
 
       - uses: actions/setup-go@v4
         with:
@@ -47,13 +38,14 @@ jobs:
         with:
           version: '2.12.2'
 
+      - name: Build binary
+        run: |-
+          cd 16112023 && make cross-build-integration-test
+
       - name: Run Integration tests
         id: integration-test
-        env:
-          USER: ${{ secrets.GH_USER }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |-
-          cd 16112023 && make cross-build-integration-test && go clean -testcache && go test -timeout 1200s -v -run TestSuite ./integration_test/kibitalk_test.go  
+          cd 16112023 && go clean -testcache && go test -timeout 1200s -v -run TestSuite ./integration_test/kibitalk_test.go  
 
       - name : Comment PR Failed
         if: failure() && steps.integration-test.outcome == 'failure'

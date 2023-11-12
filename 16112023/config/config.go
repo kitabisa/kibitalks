@@ -1,12 +1,10 @@
 package config
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/iamolegga/enviper"
 	"github.com/joho/godotenv"
-	plog "github.com/kitabisa/perkakas/log"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
@@ -40,7 +38,7 @@ func NewAppConfig() {
 	e := enviper.New(readViperConfig())
 	err := e.Unmarshal(&conf)
 	if err != nil {
-		plog.Zlogger(context.Background()).Fatal().Msgf("Cannot start app. Fatal error occured during SetupMySQLMaster | %v | %s", err, "exiting now..")
+		log.Fatal().Msgf("Cannot start app. Fatal error occured during SetupMySQLMaster | %v | %s", err, "exiting now..")
 	}
 
 	json.Marshal(conf)
@@ -61,7 +59,7 @@ func NewAppConfig() {
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	}
 
-	plog.Zlogger(context.Background()).Debug().Msgf("Config: %+v\n", conf)
+	log.Debug().Msgf("Config: %+v\n", conf)
 
 	AppCfg = conf
 	return

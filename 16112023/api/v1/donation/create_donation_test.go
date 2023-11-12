@@ -1,7 +1,9 @@
 package donation
 
 import (
+	"context"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/kitabisa/kibitalk/client/campaign"
 	mocks3 "github.com/kitabisa/kibitalk/client/campaign/mocks"
 	"github.com/kitabisa/kibitalk/client/payment"
@@ -12,6 +14,8 @@ import (
 	"github.com/kitabisa/kibitalk/config/cache/mocks"
 	"github.com/kitabisa/kibitalk/config/database"
 	mocks2 "github.com/kitabisa/kibitalk/config/database/mocks"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"net/http"
@@ -22,7 +26,10 @@ import (
 
 func TestCreateDonationByIdHandler(t *testing.T) {
 	// Create a request with a sample query parameter
-	req, err := http.NewRequest("POST", "/v1/donation", strings.NewReader("{\"amount\": 50000,\"payment_method_id\": 1,\"campaign_id\": 1}"))
+	zerolog.SetGlobalLevel(zerolog.DebugLevel)
+	log.Info().Msg("TestCreateDonationByIdHandler")
+	ctx := context.WithValue(context.Background(), middleware.RequestIDKey, "some-request-id")
+	req, err := http.NewRequestWithContext(ctx, "POST", "/v1/donation", strings.NewReader("{\"amount\": 50000,\"payment_method_id\": 1,\"campaign_id\": 1}"))
 	if err != nil {
 		t.Fatal(err)
 	}

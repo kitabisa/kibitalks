@@ -3,7 +3,9 @@ package integration_test
 import (
 	"context"
 	"fmt"
-	"github.com/kitabisa/perkakas/database/mysql"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/kitabisa/kibitalk/config"
+	"github.com/kitabisa/kibitalk/config/database"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	tc "github.com/testcontainers/testcontainers-go/modules/compose"
@@ -50,27 +52,26 @@ func (suite *KibiTestSuite) TearDownSuite() {
 
 // Your unit tests go here
 func (suite *KibiTestSuite) TestMigrationSuccess() {
-	mysqlBuilder, err := mysql.NewMySQLConfigBuilder().WithHost("localhost").
+	config.NewAppConfig()
+	// pass the database config here because this is client from test environment not in docker environment
+	// hence it refer as localhost instead of mysql
+	iDb := database.NewMySQLConfigBuilder().WithHost("localhost").
 		WithPort(3306).
 		WithPassword("pass").
 		WithUsername("root").
 		WithDBName("kibitalk").Build()
 
-	if err != nil {
-		fmt.Println(err)
-		assert.Fail(suite.T(), "failed to build mysql config")
-	}
+	db, err := iDb.InitMysqlDB()
 
-	db, err := mysqlBuilder.InitMysqlDB()
 	if err != nil {
 		fmt.Println(err)
-		assert.Fail(suite.T(), "failed to init mysql db")
+		assert.Fail(suite.T(), "failed to connect to mysql db")
 		return
 	}
 
 	d, e := os.ReadDir("../migrations/sql")
 	if e != nil {
-		fmt.Println(err)
+		fmt.Println(e)
 		assert.Fail(suite.T(), "failed to count migrations file")
 		return
 	}
