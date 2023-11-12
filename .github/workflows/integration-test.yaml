@@ -5,6 +5,9 @@ on:
     branches:
       - master
   workflow_dispatch: {}
+  push:
+    paths:
+      - 16112023/**
 
 
 jobs:
