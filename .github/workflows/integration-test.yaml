@@ -44,7 +44,7 @@ jobs:
           USER: ${{ secrets.GH_USER }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |-
-          cd 16112023 && go clean -testcache && go test -timeout 1200s -v -run TestSuite ./integration_test/kibitalk_test.go  
+          cd 16112023 && make cross-build-integration-test && go clean -testcache && go test -timeout 1200s -v -run TestSuite ./integration_test/kibitalk_test.go  
 
       - name : Comment PR Failed
         if: failure() && steps.integration-test.outcome == 'failure'
