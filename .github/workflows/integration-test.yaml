@@ -18,6 +18,12 @@ jobs:
       - name: Checking out repository
         uses: actions/checkout@v3
 
+      - name: Configure Git for private modules
+        env:
+          USER: ${{ secrets.GH_USER }}
+          TOKEN: ${{ secrets.GH_TOKEN }}
+        run: git config --global url."https://${USER}:${TOKEN}@github.com".insteadOf "https://github.com"
+
       - uses: actions/setup-go@v4
         with:
           cache-dependency-path: 16112023/go.sum
