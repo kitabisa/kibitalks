@@ -12,7 +12,7 @@ import (
 	"github.com/kitabisa/kibitalk/config/broker/rabbitmq"
 	"github.com/kitabisa/kibitalk/config/cache"
 	"github.com/kitabisa/kibitalk/config/database"
-	"github.com/kitabisa/perkakas/log"
+	zlog "github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"net/http"
 	"os"
@@ -71,10 +71,10 @@ var RestApiCmd = &cobra.Command{
 			Handler: router,
 		}
 
-		log.Zlogger(ctx).Info().Msgf("Starting server on %s", server.Addr)
+		zlog.Ctx(context.Background()).Info().Msgf("Starting server on %s", server.Addr)
 
 		if err := server.ListenAndServe(); err != http.ErrServerClosed {
-			log.Zlogger(ctx).Err(err).Msgf("[API] Fail to start listen and server: %v", err)
+			zlog.Ctx(context.Background()).Err(err).Msgf("[API] Fail to start listen and server: %v", err)
 		}
 
 		// Create a channel to listen for OS signals (e.g., SIGINT, SIGTERM).

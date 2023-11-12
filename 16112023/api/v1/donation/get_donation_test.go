@@ -1,8 +1,10 @@
 package donation
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/kitabisa/kibitalk/config/cache"
 	"github.com/kitabisa/kibitalk/config/cache/mocks"
 	"github.com/stretchr/testify/assert"
@@ -14,7 +16,8 @@ import (
 
 func TestGetDonationByIdCacheHit(t *testing.T) {
 	// Create a request with a sample query parameter
-	req, err := http.NewRequest("GET", "/v1/donation/1", nil)
+	ctx := context.WithValue(context.Background(), middleware.RequestIDKey, "some-request-id")
+	req, err := http.NewRequestWithContext(ctx, "GET", "/v1/donation/1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}

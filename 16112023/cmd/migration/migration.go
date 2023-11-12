@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/kitabisa/kibitalk/config"
 	"github.com/kitabisa/kibitalk/config/database"
-	plog "github.com/kitabisa/perkakas/log"
+	zlog "github.com/rs/zerolog/log"
 	migrate "github.com/rubenv/sql-migrate"
 	"github.com/spf13/cobra"
 	"log"
@@ -24,7 +24,7 @@ var MigrateUpCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		plog.Zlogger(context.Background()).Info().Msgf("Migrate Success, total migrated: %d", total)
+		zlog.Ctx(context.Background()).Info().Msgf("Migrate Success, total migrated: %d", total)
 	},
 }
 

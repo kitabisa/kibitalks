@@ -476,10 +476,6 @@ github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51/go.mod h1:C
 github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvWXihfKN4Q=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/kitabisa/perkakas/database/mysql v1.1.0 h1:ULNUS7NdaJWvVUS9oOjaDhZiqfLxVIIp35iywV3RPwQ=
-github.com/kitabisa/perkakas/database/mysql v1.1.0/go.mod h1:OzXL1J5MOUetVCREALgPtYSus5h1SMJwX1j8UZeemCI=
-github.com/kitabisa/perkakas/log v1.4.1 h1:5KHnr2w1/hNQNEwT5K2auILIQLI1qe+NsCeIQoZX85g=
-github.com/kitabisa/perkakas/log v1.4.1/go.mod h1:2nEEamqTb45WS9UHfD8Ub1NYCr2nm/N66LK5wuKlkCM=
 github.com/klauspost/compress v1.16.5 h1:IFV2oUNUzZaz+XyusxpLzpzS8Pt5rh0Z16For/djlyI=
 github.com/klauspost/compress v1.16.5/go.mod h1:ntbaceVETuRiXiv4DpjP66DpAtAGkEQskQzEyD//IeE=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
