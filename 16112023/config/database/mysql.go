@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/kitabisa/kibitalk/config"
 	"github.com/rs/zerolog/log"
@@ -139,7 +140,7 @@ func NewMysqlClient() IMySQL {
 
 	dbSql, err := dbMySQL.InitMysqlDB()
 	if err != nil {
-		log.Ctx(context.Background()).Error().Msgf("Error connection to DB | %v", err)
+		log.Error().Msgf("Error connection to DB | %v", err)
 		os.Exit(1)
 	}
 

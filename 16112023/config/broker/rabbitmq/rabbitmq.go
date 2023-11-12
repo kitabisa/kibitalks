@@ -30,20 +30,20 @@ func NewAMQPClient() {
 	fmt.Println(fmt.Sprintf("amqp://%s:%s@%s:%d/", c.RabbitMQ.User, c.RabbitMQ.Pass, c.RabbitMQ.Host, c.RabbitMQ.Port))
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%d/", c.RabbitMQ.User, c.RabbitMQ.Pass, c.RabbitMQ.Host, c.RabbitMQ.Port))
 	if err != nil {
-		zlog.Ctx(context.Background()).Fatal().Msgf("Error connecting to RabbitMQ | %v", err)
+		zlog.Fatal().Msgf("Error connecting to RabbitMQ | %v", err)
 	}
 
 	ch, err := conn.Channel()
 	if err != nil {
 		conn.Close()
-		zlog.Ctx(context.Background()).Fatal().Msgf("Error creating channel RabbitMQ | %v", err)
+		zlog.Fatal().Msgf("Error creating channel RabbitMQ | %v", err)
 	}
 
 	err = ch.Confirm(false)
 	if err != nil {
 		ch.Close()
 		conn.Close()
-		zlog.Ctx(context.Background()).Fatal().Msgf("Error confirming channel RabbitMQ | %v", err)
+		zlog.Fatal().Msgf("Error confirming channel RabbitMQ | %v", err)
 	}
 
 	RabbitPublish = &AMQPClient{conn: conn}

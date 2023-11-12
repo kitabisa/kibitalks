@@ -71,10 +71,10 @@ var RestApiCmd = &cobra.Command{
 			Handler: router,
 		}
 
-		zlog.Ctx(context.Background()).Info().Msgf("Starting server on %s", server.Addr)
+		zlog.Info().Msgf("Starting server on %s", server.Addr)
 
 		if err := server.ListenAndServe(); err != http.ErrServerClosed {
-			zlog.Ctx(context.Background()).Err(err).Msgf("[API] Fail to start listen and server: %v", err)
+			zlog.Err(err).Msgf("[API] Fail to start listen and server: %v", err)
 		}
 
 		// Create a channel to listen for OS signals (e.g., SIGINT, SIGTERM).

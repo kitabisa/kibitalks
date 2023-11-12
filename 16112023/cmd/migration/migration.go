@@ -1,7 +1,6 @@
 package migration
 
 import (
-	"context"
 	"github.com/kitabisa/kibitalk/config"
 	"github.com/kitabisa/kibitalk/config/database"
 	zlog "github.com/rs/zerolog/log"
@@ -24,7 +23,7 @@ var MigrateUpCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		zlog.Ctx(context.Background()).Info().Msgf("Migrate Success, total migrated: %d", total)
+		zlog.Info().Msgf("Migrate Success, total migrated: %d", total)
 	},
 }
 
