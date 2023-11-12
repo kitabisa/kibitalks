@@ -54,7 +54,7 @@ jobs:
           message: |
             ##  ❌❌ Integration Test ❌❌
             ```
-            Migration failed. Please check integration-test action log and your migration script
+            Integration test failed. Please check integration-test action log and your migration script
             ```
 
       - name: Comment PR success
@@ -65,5 +65,5 @@ jobs:
           message: |
             ##  ✅✅ Integration Test ✅✅
             ```
-            All migration script executed properly. You may pass
+            Integration test succeed. You may pass
             ```
