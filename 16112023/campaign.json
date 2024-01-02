@@ -1,0 +1,79 @@
+{
+  "uuid": "722127ec-18fd-4311-a3a5-65d187fe7f8d",
+  "lastMigration": 29,
+  "name": "Campaign",
+  "endpointPrefix": "campaign",
+  "latency": 0,
+  "port": 8082,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "1e8bc27b-8494-4d76-a7e5-08dc8ea3b817",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": ":id",
+      "responses": [
+        {
+          "uuid": "f01882ad-50a9-4b69-93c1-ed7d40ecad0f",
+          "body": "{\n  \"id\": {{ urlParam 'id' }},\n  \"name\": \"Bantuan Kemanusiaan untuk Gaza\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "1e8bc27b-8494-4d76-a7e5-08dc8ea3b817"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

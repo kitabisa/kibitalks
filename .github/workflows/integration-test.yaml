@@ -1,0 +1,70 @@
+name: Integration-Test
+
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch: {}
+  push:
+    paths:
+      - 16112023/**
+
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v4
+        with:
+          cache-dependency-path: 16112023/go.sum
+          go-version: '1.21.3' # The Go version to download (if necessary) and use.
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ hashFiles('**/16112023/integration_test/docker/kibitalk/Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - uses: KengoTODA/actions-setup-docker-compose@main
+        with:
+          version: '2.12.2'
+
+      - name: Build binary
+        run: |-
+          cd 16112023 && make cross-build-integration-test
+
+      - name: Run Integration tests
+        id: integration-test
+        run: |-
+          cd 16112023 && go clean -testcache && go test -timeout 1200s -v -run TestSuite ./integration_test/kibitalk_test.go  
+
+      - name : Comment PR Failed
+        if: failure() && steps.integration-test.outcome == 'failure'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          recreate: true
+          message: |
+            ##  ❌❌ Integration Test ❌❌
+            ```
+            Integration test failed. Please check integration-test action log and your migration script
+            ```
+
+      - name: Comment PR success
+        if: success() && steps.integration-test.outcome == 'success'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          recreate: true
+          message: |
+            ##  ✅✅ Integration Test ✅✅
+            ```
+            Integration test succeed. You may pass
+            ```

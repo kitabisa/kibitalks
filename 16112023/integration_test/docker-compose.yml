@@ -1,0 +1,80 @@
+version: '3.5'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_PASSWORD: pass
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      TZ: "Asia/Jakarta"
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  kibitalk-api:
+    environment:
+      - APP_HOST=0.0.0.0
+      - APP_PORT=45001
+      - LOG_LEVEL=info
+      - LOG_PRETTY=true
+      - CACHE_HOST=redis
+      - CACHE_PORT=6379
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASS=pass
+      - DB_NAME=kibitalk
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
+      - API_PAYMENT_HOST=http://mockoon
+      - API_PAYMENT_PORT=8081
+      - API_CAMPAIGN_HOST=http://mockoon
+      - API_CAMPAIGN_PORT=8082
+    container_name: kibitalk-api
+    ports:
+      - 45001:45001
+    command:
+      - /bin/sh
+      - -c
+      - "while ! nc -z mysql 3306; do sleep 1; echo wait; done; echo 'Connected to mysql'; ./kibitalk migrate; ./kibitalk api"
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+      - ../migrations/sql:/opt/kibitalk/migrations/sql
+    restart: on-failure
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    platform: linux/amd64
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: heidiks/rabbitmq-delayed-message-exchange:latest
+    ports:
+      - 5672:5672
+
+  mockoon:
+    platform: linux/amd64
+    image: mockoon/cli:latest
+    command: -d /data/payment.json /data/campaign.json /data/health_check.json
+    volumes:
+      - ../payment.json:/data/payment.json
+      - ../campaign.json:/data/campaign.json
+      - ../health_check.json:/data/health_check.json
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+
+

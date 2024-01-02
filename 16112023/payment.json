@@ -1,0 +1,79 @@
+{
+  "uuid": "3949d8f0-b909-4ab5-b584-7fffb72add4a",
+  "lastMigration": 29,
+  "name": "Payment",
+  "endpointPrefix": "payment",
+  "latency": 0,
+  "port": 8081,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "1576ca79-2227-4047-a623-53d2c7cc1678",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "",
+      "responses": [
+        {
+          "uuid": "389f9e61-2879-44d5-822c-fb535ffb872d",
+          "body": "{\n  \"id\": 1,\n  \"payment_method_name\": \"Kantong Donasi\",\n  \"amount\": 10000\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "1576ca79-2227-4047-a623-53d2c7cc1678"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
